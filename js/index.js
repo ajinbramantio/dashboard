@@ -1,11 +1,11 @@
-let datapegawai = [
+let dataEmployee = [
   {
     id: 1,
     name: 'Bara',
     alamat: 'tebet',
     email: 'bara@gmail.com',
     age: 28,
-    price: '5000000',
+    salary: 5000000,
     startDate: `21/January/2019`
   },
   {
@@ -14,7 +14,7 @@ let datapegawai = [
     alamat: 'kuningan',
     email: 'shakti@gmail.com',
     age: 25,
-    price: '8000000',
+    salary: 8000000,
     startDate: `21/January/2019`
   },
   {
@@ -23,10 +23,12 @@ let datapegawai = [
     alamat: 'Depok',
     email: 'shakti@gmail.com',
     age: 25,
-    price: '7000000',
+    salary: 7000000,
     startDate: `21/January/2019`
   }
 ]
+
+let count = 3
 
 // element UL
 const tableDOM = document.getElementById('list-body')
@@ -35,40 +37,45 @@ const DivformAdd = document.getElementById('divform')
 // console.log(DivformAdd)
 // console.log(FormAdd)
 
-pegawai = {
+const employee = {
   display: () => {
     tableDOM.innerHTML = ''
-    let count = 1
 
-    datapegawai.forEach(data => {
-      var bilangan = data.price
+    dataEmployee.forEach(data => {
+      const reverse = data.salary
+        ? data.salary
+            .toString()
+            .split('')
+            .reverse()
+            .join('')
+        : 0
 
-      var reverse = bilangan
-          .toString()
-          .split('')
-          .reverse()
-          .join(''),
-        rupiah = reverse.match(/\d{1,3}/g)
-      rupiah = rupiah
-        .join('.')
-        .split('')
-        .reverse()
-        .join('')
+      const rupiah = reverse
+        ? reverse
+            .match(/\d{1,3}/g)
+            .join('.')
+            .split('')
+            .reverse()
+            .join('')
+        : ''
 
-      const date = data.startDate.split('/')
-      //   console.log(date)
-      const tr = document.createElement('tr')
-      tr.innerHTML = `<td>${count++}</td><td>${data.name}</td><td>${
-        data.alamat
-      }</td><td>${data.email}</td><td>${data.age}</td><td>${date[0]} - ${
-        date[date.length - 2]
-      } - ${
+      const date = data.startDate ? data.startDate.split('/') : ''
+      const dateString = `${date[0]} - ${date[date.length - 2]} - ${
         date[date.length - 1]
-      }</td><td>Rp.${rupiah}</td><td colspan="1"><button type="button" class="btn btn-warning"  data-target="#ModelEdit"
-                    data-toggle="modal" onclick="pegawai.editData(${
+      }`
+
+      // console.log(date)
+      const tr = document.createElement('tr')
+
+      tr.innerHTML = `<td>${data.id}</td><td>${data.name}</td><td>${
+        data.alamat
+      }</td><td>${data.email}</td><td>${
+        data.age
+      }</td><td>${dateString}</td><td>Rp.${rupiah}</td><td colspan="1"><button type="button" class="btn btn-warning"  data-target="#ModelEdit"
+                    data-toggle="modal" onclick="employee.editData(${
                       data.id
                     })"><i class="fa fa-pencil"></i>
-        </button></td><td colspan="1"><button type="button" class="btn btn-danger" onclick="pegawai.remove(${
+        </button></td><td colspan="1"><button type="button" class="btn btn-danger" onclick="employee.remove(${
           data.id
         })"><i class="fa fa-trash-o"></i></button>
         </td>`
@@ -77,17 +84,27 @@ pegawai = {
     })
   },
 
-  add: () => {
+  add: event => {
+    event.preventDefault()
+
     const newName = document.getElementById('newNameAdd').value
-    // console.log(newName)
+    const date = document.getElementById('datepicker-add').value
+
+    const data = {
+      id: count++,
+      name: newName,
+      date
+    }
+
+    dataEmployee.push(data)
+    employee.display()
   },
 
   editData: editById => {
     // console.log(editById)
-    const filterPegawai = datapegawai.filter(pegawai => {
-      return pegawai.id === editById
+    const filterPegawai = dataEmployee.filter(employee => {
+      return employee.id === editById
     })
-    console.log(filterPegawai)
     return filterPegawai
   },
 
@@ -98,27 +115,27 @@ pegawai = {
     if (keyname === '') {
       console.log(keyname === '')
 
-      pegawai.display(datapegawai)
+      employee.display(dataEmployee)
     } else {
-      const resultSearch = datapegawai.filter(item => {
+      const resultSearch = dataEmployee.filter(item => {
         //   console.log(item.name.toLowerCase().includes(keyword.toLowerCase()))
 
         return item.name.toLowerCase().includes(keyname.toLowerCase())
       })
-      datapegawai = resultSearch
-      pegawai.display(datapegawai)
+      dataEmployee = resultSearch
+      employee.display(dataEmployee)
     }
   },
 
   remove: ID => {
-    let removepegawai = datapegawai.filter(student => {
+    let removepegawai = dataEmployee.filter(student => {
       // console.log(student.id, ID)
       return student.id !== ID
     })
-    datapegawai = removepegawai
+    dataEmployee = removepegawai
 
-    pegawai.display(datapegawai)
+    employee.display(dataEmployee)
   }
 }
-let editData = pegawai.editData()
-pegawai.display()
+
+employee.display()

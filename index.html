@@ -10,7 +10,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>SB Admin - Tables</title>
+    <title>Dashboard</title>
 
     <!-- Custom fonts for this template-->
     <link
@@ -51,7 +51,7 @@
       <form
         class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"
         id="search-form"
-        onsubmit="pegawai.search(event)"
+        onsubmit="employee.search(event)"
       >
         <div class="input-group">
           <input
@@ -153,7 +153,7 @@
                     <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h3 class="text-primary">signUp</h3>
+                          <h3 class="text-primary">Register</h3>
                           <button
                             type="button"
                             class="close"
@@ -163,29 +163,24 @@
                           </button>
                         </div>
                         <div id="divform" class="modal-body form-group">
-                          <form onsubmit="pegawai.add(event)">
-                            <label
-                              ><i class="fa fa-user fa-2x"></i> Name:</label
-                            >
-                            <input
-                              id="newNameAdd"
-                              type="text"
-                              class="form-control"
-                            />
-                            <label
-                              ><i class="fa fa-calendar fa-2x"></i> Date:</label
-                            >
-                            <input id="datepicker" width="276" />
+                          <label><i class="fa fa-user fa-2x"></i> Name:</label>
+                          <input
+                            id="newNameAdd"
+                            type="text"
+                            class="form-control"
+                          />
+                          <label
+                            ><i class="fa fa-calendar fa-2x"></i> Date:</label
+                          >
+                          <input id="datepicker-add" width="276" />
 
-                            <button
-                              type="button"
-                              class="btn btn-success"
-                              style="margin-top:10px"
-                              data-dismiss="modal"
-                            >
-                              Add
-                            </button>
-                          </form>
+                          <input
+                            onclick="employee.add(event)"
+                            type="button"
+                            class="btn btn-success"
+                            data-dismiss="modal"
+                            value="Add"
+                          />
                         </div>
                       </div>
                     </div>
@@ -207,7 +202,7 @@
                           </button>
                         </div>
                         <div id="divformEdit" class="modal-body form-group">
-                          <form onsubmit="pegawai.editData()">
+                          <form onsubmit="employee.editData()">
                             <label
                               ><i class="fa fa-user fa-2x"></i> Name:</label
                             >
@@ -215,12 +210,12 @@
                               id="editName"
                               type="text"
                               class="form-control"
-                              value=pegawai.editData()
+                              value="employee.editData()"
                             />
                             <label
                               ><i class="fa fa-calendar fa-2x"></i> Date:</label
                             >
-                            <input id="datepicker" width="276" />
+                            <input id="datepicker-edit" width="276" />
 
                             <button
                               type="button"
@@ -230,8 +225,8 @@
                             >
                               Add
                             </button>
-                          </div>
                           </form>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -284,8 +279,6 @@
     <!-- <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
 
     <!-- Core plugin JavaScript-->
-    <script src="./js/index.js"></script>
-
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
     <script src="./vendor/bootstrap/js/bootstrap.js"></script>
@@ -294,9 +287,13 @@
       type="text/javascript"
     ></script>
     <script>
-      $('#datepicker').datepicker({
+      $('#datepicker-add').datepicker({
+        uiLibrary: 'bootstrap4'
+      })
+      $('#datepicker-edit').datepicker({
         uiLibrary: 'bootstrap4'
       })
     </script>
+    <script src="./js/index.js"></script>
   </body>
 </html>

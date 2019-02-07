@@ -168,11 +168,50 @@
                             id="newNameAdd"
                             type="text"
                             class="form-control"
+                            required
+                          />
+                          <label
+                            ><i class="fa fa-address-card-o fa-2x"></i>
+                            Alamat:</label
+                          >
+                          <input
+                            id="newAddres"
+                            type="text"
+                            class="form-control"
+                            required
+                          />
+                          <label
+                            ><i class="fa fa-envelope-o fa-2x"></i>
+                            Email:</label
+                          >
+                          <input
+                            id="newEmail"
+                            type="text"
+                            class="form-control"
+                            required
+                          />
+                          <label
+                            ><i class="fa fa-wheelchair fa-2x"></i> Age:</label
+                          >
+                          <input
+                            id="newAge"
+                            type="text"
+                            class="form-control"
+                            required
                           />
                           <label
                             ><i class="fa fa-calendar fa-2x"></i> Date:</label
                           >
-                          <input id="datepicker-add" width="276" />
+                          <input id="datepicker-add" width="276" required />
+                          <label
+                            ><i class="fa fa-money fa-2x"></i> Sallary:</label
+                          >
+                          <input
+                            id="newSallary"
+                            type="text"
+                            class="form-control"
+                            required
+                          />
 
                           <input
                             onclick="employee.add(event)"
@@ -210,7 +249,7 @@
                               id="editName"
                               type="text"
                               class="form-control"
-                              value="employee.editData()"
+                              value=""
                             />
                             <label
                               ><i class="fa fa-calendar fa-2x"></i> Date:</label
@@ -223,7 +262,7 @@
                               style="margin-top:10px"
                               data-dismiss="modal"
                             >
-                              Add
+                              Update
                             </button>
                           </form>
                         </div>

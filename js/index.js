@@ -86,18 +86,39 @@ const employee = {
 
   add: event => {
     event.preventDefault()
-
     const newName = document.getElementById('newNameAdd').value
+    const addres = document.getElementById('newAddres').value
+    const email = document.getElementById('newEmail').value
+    const age = document.getElementById('newAge').value
     const date = document.getElementById('datepicker-add').value
+    const sallary = document.getElementById('newSallary').value
+    console.log(addres)
+    console.log(sallary)
+    console.log(date)
 
-    const data = {
-      id: count++,
-      name: newName,
-      date
+    if (
+      newName == '' ||
+      addres === '' ||
+      email === '' ||
+      age === '' ||
+      date === '' ||
+      sallary === ''
+    ) {
+      console.log('fail bro')
+    } else {
+      const data = {
+        id: count++,
+        name: newName,
+        alamat: addres,
+        age,
+        email,
+        startDate: date,
+        salary: sallary
+      }
+
+      dataEmployee.push(data)
+      employee.display()
     }
-
-    dataEmployee.push(data)
-    employee.display()
   },
 
   editData: editById => {
@@ -105,7 +126,11 @@ const employee = {
     const filterPegawai = dataEmployee.filter(employee => {
       return employee.id === editById
     })
-    return filterPegawai
+
+    document.getElementById('editName').innerHTML = filterPegawai.name
+    console.log(filterPegawai)
+    // DivformEdit = document.getElementById('Editname')
+    // return filterPegawai
   },
 
   search: event => {
@@ -113,7 +138,7 @@ const employee = {
 
     const keyname = document.getElementById('search-text').value
     if (keyname === '') {
-      console.log(keyname === '')
+      // console.log(keyname === '')
 
       employee.display(dataEmployee)
     } else {
@@ -139,3 +164,5 @@ const employee = {
 }
 
 employee.display()
+
+setInterval(employee.editData())

@@ -30,12 +30,9 @@ let dataEmployee = [
 
 let count = 3
 
-// element UL
+// element list body
 const tableDOM = document.getElementById('list-body')
-// console.log(tableDOM)
 const DivformAdd = document.getElementById('divform')
-// console.log(DivformAdd)
-// console.log(FormAdd)
 
 const employee = {
   display: () => {
@@ -63,8 +60,6 @@ const employee = {
       const dateString = `${date[date.length - 2]} - ${date[0]} - ${
         date[date.length - 1]
       }`
-
-      // console.log(date)
       const tr = document.createElement('tr')
 
       tr.innerHTML = `<td>${data.id}</td><td>${data.name}</td><td>${
@@ -92,14 +87,13 @@ const employee = {
     const age = document.getElementById('newAge').value
     const date = document.getElementById('datepicker-add').value
     const sallary = document.getElementById('newSallary').value
-    // console.log(addres)
+
     let money = ''
     for (let i = 0; i < sallary.length; i++) {
-      if (sallary[i] !== '.') {
+      if (sallary[i] !== '.' || sallary[i] !== ',') {
         money += sallary[i]
       }
     }
-    // console.log(type money)
 
     if (
       newName == '' ||
@@ -148,7 +142,6 @@ const employee = {
     const updateAge = document.getElementById('editAge').value
     const updateDate = document.getElementById('datepickerEdit').value
     const updateSallary = document.getElementById('editSallary').value
-    // console.log(updateName)
 
     let updateDataById = dataEmployee.map(data => {
       let result = ''
@@ -162,18 +155,13 @@ const employee = {
           startDate: updateDate,
           salary: updateSallary
         }
-        // return object
         result = object
-        // console.log(object)
       } else {
         result = data
-        // console.log(data)
       }
-      // data = result
       return result
     })
     dataEmployee = updateDataById
-    // console.log(updateDataById)
     employee.display()
   },
 
@@ -182,12 +170,9 @@ const employee = {
 
     const keyname = document.getElementById('search-text').value
     if (keyname === '') {
-      // console.log(keyname === '')
       alert('anda belum memasukan text')
     } else {
       const resultSearch = dataEmployee.filter(item => {
-        //   console.log(item.name.toLowerCase().includes(keyword.toLowerCase()))
-
         return item.name.toLowerCase().includes(keyname.toLowerCase())
       })
       dataEmployee = resultSearch

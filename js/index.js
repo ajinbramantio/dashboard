@@ -6,7 +6,7 @@ let dataEmployee = [
     email: 'bara@gmail.com',
     age: 28,
     salary: 5000000,
-    startDate: `21/January/2019`
+    startDate: `09/21/2019`
   },
   {
     id: 2,
@@ -15,7 +15,7 @@ let dataEmployee = [
     email: 'shakti@gmail.com',
     age: 25,
     salary: 8000000,
-    startDate: `21/January/2019`
+    startDate: `03/21/2019`
   },
   {
     id: 3,
@@ -24,7 +24,7 @@ let dataEmployee = [
     email: 'shakti@gmail.com',
     age: 25,
     salary: 7000000,
-    startDate: `21/January/2019`
+    startDate: `12/30/2019`
   }
 ]
 
@@ -60,7 +60,7 @@ const employee = {
         : ''
 
       const date = data.startDate ? data.startDate.split('/') : ''
-      const dateString = `${date[0]} - ${date[date.length - 2]} - ${
+      const dateString = `${date[date.length - 2]} - ${date[0]} - ${
         date[date.length - 1]
       }`
 
@@ -71,7 +71,7 @@ const employee = {
         data.alamat
       }</td><td>${data.email}</td><td>${
         data.age
-      }</td><td>${dateString}</td><td>Rp.${rupiah}</td><td colspan="1"><button type="button" class="btn btn-warning"  data-target="#ModelEdit"
+      }</td><td>${dateString}</td><td>Rp.${rupiah}</td><td colspan="1"><button id ="number" type="button" class="btn btn-warning"  data-target="#ModelEdit"
                     data-toggle="modal" onclick="employee.editData(${
                       data.id
                     })"><i class="fa fa-pencil"></i>
@@ -92,9 +92,14 @@ const employee = {
     const age = document.getElementById('newAge').value
     const date = document.getElementById('datepicker-add').value
     const sallary = document.getElementById('newSallary').value
-    console.log(addres)
-    console.log(sallary)
-    console.log(date)
+    // console.log(addres)
+    let money = ''
+    for (let i = 0; i < sallary.length; i++) {
+      if (sallary[i] !== '.') {
+        money += sallary[i]
+      }
+    }
+    // console.log(type money)
 
     if (
       newName == '' ||
@@ -104,7 +109,7 @@ const employee = {
       date === '' ||
       sallary === ''
     ) {
-      console.log('fail bro')
+      alert('semua data harus di isi')
     } else {
       const data = {
         id: count++,
@@ -113,7 +118,7 @@ const employee = {
         age,
         email,
         startDate: date,
-        salary: sallary
+        salary: money
       }
 
       dataEmployee.push(data)
@@ -121,16 +126,55 @@ const employee = {
     }
   },
 
-  editData: editById => {
-    // console.log(editById)
-    const filterPegawai = dataEmployee.filter(employee => {
-      return employee.id === editById
+  editData: editId => {
+    const employee = dataEmployee.find(employee => {
+      return employee.id === editId
     })
 
-    document.getElementById('editName').innerHTML = filterPegawai.name
-    console.log(filterPegawai)
-    // DivformEdit = document.getElementById('Editname')
-    // return filterPegawai
+    document.getElementById('editId').value = employee.id
+    document.getElementById('editName').value = employee.name
+    document.getElementById('editAddres').value = employee.alamat
+    document.getElementById('editEmail').value = employee.email
+    document.getElementById('editAge').value = employee.age
+    document.getElementById('datepickerEdit').value = employee.startDate
+    document.getElementById('editSallary').value = employee.salary
+  },
+
+  updateData: id => {
+    const editId = document.getElementById('editId').value
+    const updateName = document.getElementById('editName').value
+    const updateAddress = document.getElementById('editAddres').value
+    const updateEmail = document.getElementById('editEmail').value
+    const updateAge = document.getElementById('editAge').value
+    const updateDate = document.getElementById('datepickerEdit').value
+    const updateSallary = document.getElementById('editSallary').value
+    // console.log(updateName)
+
+    let updateDataById = dataEmployee.map(data => {
+      let result = ''
+      if (data.id == editId) {
+        const object = {
+          id: data.id,
+          name: updateName,
+          alamat: updateAddress,
+          email: updateEmail,
+          age: updateAge,
+          startDate: updateDate,
+          salary: updateSallary
+        }
+        // return object
+        result = object
+        // console.log(object)
+      } else {
+        result = data
+        // console.log(data)
+      }
+      // data = result
+      return result
+    })
+    dataEmployee = updateDataById
+    // console.log(updateDataById)
+    employee.display()
   },
 
   search: event => {
@@ -139,8 +183,7 @@ const employee = {
     const keyname = document.getElementById('search-text').value
     if (keyname === '') {
       // console.log(keyname === '')
-
-      employee.display(dataEmployee)
+      alert('anda belum memasukan text')
     } else {
       const resultSearch = dataEmployee.filter(item => {
         //   console.log(item.name.toLowerCase().includes(keyword.toLowerCase()))
@@ -164,5 +207,3 @@ const employee = {
 }
 
 employee.display()
-
-setInterval(employee.editData())

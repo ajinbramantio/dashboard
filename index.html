@@ -240,8 +240,20 @@
                             &times;
                           </button>
                         </div>
-                        <div id="divformEdit" class="modal-body form-group">
-                          <form onsubmit="employee.editData()">
+                        <div
+                          id="divformEdit"
+                          class="modal-body form-group"
+                          onclick="employee.updateData(event)"
+                        >
+                          <form>
+                            <label><i class="fa fa-user fa-2x"></i> ID:</label>
+                            <input
+                              id="editId"
+                              type="text"
+                              class="form-control"
+                              disabled
+                            />
+
                             <label
                               ><i class="fa fa-user fa-2x"></i> Name:</label
                             >
@@ -249,12 +261,51 @@
                               id="editName"
                               type="text"
                               class="form-control"
-                              value=""
+                            />
+
+                            <label
+                              ><i class="fa fa-address-card-o fa-2x"></i>
+                              Alamat:</label
+                            >
+                            <input
+                              id="editAddres"
+                              type="text"
+                              class="form-control"
+                              required
+                            />
+                            <label
+                              ><i class="fa fa-envelope-o fa-2x"></i>
+                              Email:</label
+                            >
+                            <input
+                              id="editEmail"
+                              type="text"
+                              class="form-control"
+                              required
+                            />
+                            <label
+                              ><i class="fa fa-wheelchair fa-2x"></i>
+                              Age:</label
+                            >
+                            <input
+                              id="editAge"
+                              type="text"
+                              class="form-control"
+                              required
                             />
                             <label
                               ><i class="fa fa-calendar fa-2x"></i> Date:</label
                             >
-                            <input id="datepicker-edit" width="276" />
+                            <input id="datepickerEdit" width="276" />
+                            <label
+                              ><i class="fa fa-money fa-2x"></i> Sallary:</label
+                            >
+                            <input
+                              id="editSallary"
+                              type="text"
+                              class="form-control"
+                              required
+                            />
 
                             <button
                               type="button"
@@ -329,7 +380,7 @@
       $('#datepicker-add').datepicker({
         uiLibrary: 'bootstrap4'
       })
-      $('#datepicker-edit').datepicker({
+      $('#datepickerEdit').datepicker({
         uiLibrary: 'bootstrap4'
       })
     </script>
